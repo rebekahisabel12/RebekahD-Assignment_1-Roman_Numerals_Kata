@@ -1,18 +1,20 @@
-def whole_number_to_roman_numeral(num):
-    if num < 1 or num > 5:
-        print("Does not exist")
+roman_key = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
 
-    small_numbers = {
-        1: 'i',
-        2: 'ii',
-        3: 'ii'
-    }
 
-    return small_numbers[num]
+def i2r(converter):
+    first_check = None
+    for roman_num, integer in roman_key.items():
+        if integer == converter:
+            return roman_num
+        if converter > integer:
+            first_check = roman_num
+
+    remaining = converter - roman_key[first_check]
+    return first_check + i2r(remaining)
 
 
 converter = int(input("Enter whole number: "))
 
-result = whole_number_to_roman_numeral(converter)
+result = i2r(converter)
 
 print(f"Whole Number: {converter}, Roman Numeral: {result}")
